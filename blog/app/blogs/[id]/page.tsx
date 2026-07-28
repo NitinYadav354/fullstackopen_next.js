@@ -3,7 +3,7 @@ import { IncrementLikes } from "@/app/actions/blogs"
 import { notFound } from "next/navigation"
 const blogList = async({params} : {params : Promise<{id : string}>}) => {
     const {id} = await params
-    const blog = getBlogsByID(Number(id))
+    const blog = await getBlogsByID(Number(id))
     console.log(blog)
 
     if (!blog) {

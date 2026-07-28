@@ -3,7 +3,7 @@ import { getBlogs,  } from "../services/blogs";
 const Blogs = async({searchParams}: {searchParams: Promise<{filter: string}>}) => {
     let {filter = ""} = await searchParams
     filter = filter?.toLowerCase()
-    let blogs = [...getBlogs()]
+    let blogs = [... await getBlogs()]
     blogs.sort((a, b) => b.likes - a.likes);
     blogs = blogs.filter(blog => blog.title.toLowerCase().includes(filter))
     return(
