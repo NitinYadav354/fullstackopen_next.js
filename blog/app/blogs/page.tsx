@@ -1,4 +1,4 @@
-import { getBlogs } from "../services/blogs";
+import { getBlogs,  } from "../services/blogs";
 
 const Blogs = () => {
     const blogs = getBlogs()

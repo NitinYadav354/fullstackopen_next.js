@@ -1,4 +1,5 @@
 import { getBlogsByID } from "@/app/services/blogs"
+import { IncrementLikes } from "@/app/actions/blogs"
 import { notFound } from "next/navigation"
 const blogList = async({params} : {params : Promise<{id : string}>}) => {
     const {id} = await params
@@ -15,6 +16,10 @@ const blogList = async({params} : {params : Promise<{id : string}>}) => {
             <p>{blog.author}</p>
             <p>{blog.url}</p>
             <p>{blog.likes}</p>
+            <form action={IncrementLikes}>
+                <input type="hidden" name="id" value={blog.id}/>
+                <button type="submit">👍</button>
+            </form>
         </div>
     )
 

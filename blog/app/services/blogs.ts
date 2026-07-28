@@ -50,3 +50,11 @@ export const getBlogsByID = (id : number) => {
   const blog = blogs.find((blog) => blog.id === id)
   return blog
 }
+
+export const incrementLike = (id : number) => {
+  const blog = blogs.find((blog) => blog.id === id)
+  if (blog){
+    blog.likes++;
+  }
+}
+
