@@ -1,3 +1,5 @@
+import { relations } from "drizzle-orm";
+import { unique } from "drizzle-orm/gel-core";
 import { pgTable, serial, text, integer } from "drizzle-orm/pg-core";
 
 export const blogs = pgTable("blogs", {
@@ -6,5 +8,25 @@ export const blogs = pgTable("blogs", {
     author: text("author").notNull(),
     url: text("url").notNull(),
     likes : integer("likes").notNull().default(0),
+    userID : integer("user_id").notNull().references(()=> users.id),
 
 })
+
+export const users = pgTable("users", {
+    id : serial('id').primaryKey(),
+    username : text("username").notNull().unique(),
+    name : text("name").notNull(),
+    passwordHash : text("passwordHash").notNull().default("")
+})
+
+export const userRelation = relations(users, ({many}) => ({
+    blogs : many(blogs),
+})
+)
+
+export const blogRelation = relations(blogs, ({one}) => ({
+    user: one(users, {
+        fields : [blogs.userID],
+        references : [users.id],
+    }),
+}))
