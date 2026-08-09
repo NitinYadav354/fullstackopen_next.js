@@ -1,6 +1,5 @@
 "use server"
 
-import { redirect } from "next/navigation"
 import { addBlogs, incrementLike } from "../services/blogs"
 import { revalidatePath } from "next/cache"
 import { auth } from "@/auth"
@@ -10,6 +9,7 @@ export type BlogFormState = {
     title: string
     author: string
     url: string
+    success?: boolean
 }
 
 export const createBlog = async (
@@ -58,7 +58,7 @@ export const createBlog = async (
 
     await addBlogs(title, author, url)
     revalidatePath("/blogs")
-    redirect("/blogs")
+    return { error: "", title: "", author: "", url: "", success: true }
 }
 
 export const IncrementLikes = async (formData: FormData) => {
