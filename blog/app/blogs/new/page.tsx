@@ -38,6 +38,7 @@ const newBlog = () => {
                         name="title"
                         defaultValue={state.title}
                         placeholder="Enter blog title"
+                        data-testid="title-input"
                         className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                 </div>
@@ -51,6 +52,7 @@ const newBlog = () => {
                         name="author"
                         defaultValue={state.author}
                         placeholder="Enter author name"
+                        data-testid="author-input"
                         className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                 </div>
@@ -64,12 +66,14 @@ const newBlog = () => {
                         name="url"
                         defaultValue={state.url}
                         placeholder="Enter blog URL"
+                        data-testid="url-input"
                         className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                 </div>
 
                 <button
                     type="submit"
+                    data-testid="create-blog-button"
                     className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition"
                 >
                     Create Blog

@@ -35,16 +35,16 @@ export default function LoginPage() {
                 <div>
           <label>
             Username
-            <input type="text" name="username" required />
+            <input type="text" name="username" required data-testid="username-input" />
           </label>
         </div>
         <div>
           <label>
             Password
-            <input type="password" name="password" required />
+            <input type="password" name="password" required data-testid="password-input" />
           </label>
         </div>
-        <button type="submit">submit</button>
+        <button type="submit" data-testid="login-button">submit</button>
             </form>
 
         </div>
