@@ -3,6 +3,9 @@
 import { addBlogs, incrementLike } from "../services/blogs"
 import { revalidatePath } from "next/cache"
 import { auth } from "@/auth"
+import { db } from "@/db"
+import { readingList } from "@/db/schema"
+import { redirect } from "next/navigation"
 
 export type BlogFormState = {
     error: string
@@ -66,4 +69,25 @@ export const IncrementLikes = async (formData: FormData) => {
     await incrementLike(id)
     revalidatePath(`/blogs/${id}`)
     revalidatePath("/blogs")
+}
+
+export const addBlogToReadingList = async (blogId: number) => {
+    const session = await auth()
+    if (!session || !session.user) {
+        redirect("/login")
+    }
+
+    const userId = session.user.id
+    if (!userId) {
+        redirect("/login")
+    }
+
+    await db.insert(readingList).values({
+        userId: Number(userId),
+        blogId: blogId,
+        read: false,
+    })
+
+    revalidatePath(`/blogs/${blogId}`)
+    revalidatePath("/me")
 }

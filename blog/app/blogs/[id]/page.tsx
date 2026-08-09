@@ -1,7 +1,11 @@
 import Link from "next/link"
 import { getBlogsByID } from "@/app/services/blogs"
-import { IncrementLikes } from "@/app/actions/blogs"
+import { IncrementLikes, addBlogToReadingList } from "@/app/actions/blogs"
 import { notFound } from "next/navigation"
+import { auth } from "@/auth"
+import { db } from "@/db"
+import { readingList } from "@/db/schema"
+import { eq, and } from "drizzle-orm"
 
 const blogList = async ({
   params,
@@ -14,6 +18,20 @@ const blogList = async ({
   if (!blog) {
     notFound()
   }
+
+  const session = await auth()
+  const userId = session?.user?.id ? Number(session.user.id) : null
+  const isOwnBlog = userId === blog.userID
+
+  let isInReadingList = false
+  if (userId && !isOwnBlog) {
+    const existingEntry = await db.query.readingList.findFirst({
+      where: and(eq(readingList.userId, userId), eq(readingList.blogId, Number(id))),
+    })
+    isInReadingList = !!existingEntry
+  }
+
+  const handleAddToReadingList = addBlogToReadingList.bind(null, Number(id))
 
   return (
     <div className="max-w-2xl mx-auto p-6">
@@ -41,7 +59,7 @@ const blogList = async ({
           </p>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4 mb-6">
           <span className="text-lg font-semibold">
             Likes: <span className="text-blue-600">{blog.likes}</span>
           </span>
@@ -55,6 +73,22 @@ const blogList = async ({
             </button>
           </form>
         </div>
+
+        {!isOwnBlog && (
+          <form action={handleAddToReadingList}>
+            <button
+              type="submit"
+              disabled={isInReadingList}
+              className={`px-4 py-2 rounded transition ${
+                isInReadingList
+                  ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                  : "bg-green-500 hover:bg-green-600 text-white"
+              }`}
+            >
+              {isInReadingList ? "✓ Added to reading list" : "Add to reading list"}
+            </button>
+          </form>
+        )}
       </article>
     </div>
   )

@@ -1,9 +1,10 @@
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 import { db } from "@/db"
-import { users } from "@/db/schema"
+import { users, readingList } from "@/db/schema"
 import { eq } from "drizzle-orm"
 import { generateToken } from "../actions/users"
+import Link from "next/link"
 
 const MePage = async () => {
   const session = await auth()
@@ -25,8 +26,15 @@ const MePage = async () => {
     redirect("/login")
   }
 
+  const userReadingList = await db.query.readingList.findMany({
+    where: eq(readingList.userId, Number(userId)),
+    with: {
+      blog: true,
+    },
+  })
+
   return (
-    <div className="max-w-2xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto p-6">
       <h2 className="text-3xl font-bold mb-6">My Profile</h2>
 
       <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
@@ -51,7 +59,7 @@ const MePage = async () => {
         </div>
       </div>
 
-      <div className="bg-white border border-gray-200 rounded-lg p-6">
+      <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
         <h3 className="text-xl font-bold mb-4">API Token</h3>
 
         {user.token ? (
@@ -93,6 +101,54 @@ const MePage = async () => {
               </button>
             </form>
           </div>
+        )}
+      </div>
+
+      <div className="bg-white border border-gray-200 rounded-lg p-6">
+        <h3 className="text-xl font-bold mb-4">Reading List</h3>
+
+        {userReadingList.length === 0 ? (
+          <p className="text-gray-600">
+            Your reading list is empty.{" "}
+            <Link href="/blogs" className="text-blue-600 hover:underline">
+              Add some blogs
+            </Link>
+          </p>
+        ) : (
+          <ul className="space-y-3">
+            {userReadingList.map((entry) => (
+              <li
+                key={entry.id}
+                className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition"
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <Link
+                    href={`/blogs/${entry.blog.id}`}
+                    className="text-blue-600 hover:underline font-semibold"
+                  >
+                    {entry.blog.title}
+                  </Link>
+                  {entry.read && (
+                    <span className="text-green-600 font-medium text-sm">✓ Read</span>
+                  )}
+                </div>
+                <p className="text-gray-600 text-sm mb-2">
+                  <strong>Author:</strong> {entry.blog.author}
+                </p>
+                <p className="text-gray-600 text-sm">
+                  <strong>URL:</strong>{" "}
+                  <a
+                    href={entry.blog.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:underline"
+                  >
+                    {entry.blog.url}
+                  </a>
+                </p>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
     </div>
