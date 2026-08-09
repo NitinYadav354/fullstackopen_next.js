@@ -6,6 +6,7 @@ import { auth } from "@/auth"
 import { db } from "@/db"
 import { readingList } from "@/db/schema"
 import { redirect } from "next/navigation"
+import { eq } from "drizzle-orm"
 
 export type BlogFormState = {
     error: string
@@ -89,5 +90,33 @@ export const addBlogToReadingList = async (blogId: number) => {
     })
 
     revalidatePath(`/blogs/${blogId}`)
+    revalidatePath("/me")
+}
+
+export const markAsRead = async (readingListId: number) => {
+    const session = await auth()
+    if (!session || !session.user) {
+        redirect("/login")
+    }
+
+    const userId = session.user.id
+    if (!userId) {
+        redirect("/login")
+    }
+
+    // Verify the entry belongs to the current user
+    const entry = await db.query.readingList.findFirst({
+        where: eq(readingList.id, readingListId),
+    })
+
+    if (!entry || entry.userId !== Number(userId)) {
+        throw new Error("Unauthorized")
+    }
+
+    await db
+        .update(readingList)
+        .set({ read: true })
+        .where(eq(readingList.id, readingListId))
+
     revalidatePath("/me")
 }

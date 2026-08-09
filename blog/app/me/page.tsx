@@ -4,6 +4,7 @@ import { db } from "@/db"
 import { users, readingList } from "@/db/schema"
 import { eq } from "drizzle-orm"
 import { generateToken } from "../actions/users"
+import { markAsRead } from "../actions/blogs"
 import Link from "next/link"
 
 const MePage = async () => {
@@ -31,7 +32,11 @@ const MePage = async () => {
     with: {
       blog: true,
     },
+    orderBy: (entries, { desc }) => [desc(entries.id)],
   })
+
+  const unreadBlogs = userReadingList.filter((entry) => !entry.read)
+  const readBlogs = userReadingList.filter((entry) => entry.read)
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -115,40 +120,98 @@ const MePage = async () => {
             </Link>
           </p>
         ) : (
-          <ul className="space-y-3">
-            {userReadingList.map((entry) => (
-              <li
-                key={entry.id}
-                className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition"
-              >
-                <div className="flex items-start justify-between mb-2">
-                  <Link
-                    href={`/blogs/${entry.blog.id}`}
-                    className="text-blue-600 hover:underline font-semibold"
-                  >
-                    {entry.blog.title}
-                  </Link>
-                  {entry.read && (
-                    <span className="text-green-600 font-medium text-sm">✓ Read</span>
-                  )}
-                </div>
-                <p className="text-gray-600 text-sm mb-2">
-                  <strong>Author:</strong> {entry.blog.author}
-                </p>
-                <p className="text-gray-600 text-sm">
-                  <strong>URL:</strong>{" "}
-                  <a
-                    href={entry.blog.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline"
-                  >
-                    {entry.blog.url}
-                  </a>
-                </p>
-              </li>
-            ))}
-          </ul>
+          <div className="space-y-6">
+            {/* Unread Section */}
+            {unreadBlogs.length > 0 && (
+              <div>
+                <h4 className="text-lg font-semibold text-gray-800 mb-3">
+                  Unread ({unreadBlogs.length})
+                </h4>
+                <ul className="space-y-3">
+                  {unreadBlogs.map((entry) => (
+                    <li
+                      key={entry.id}
+                      className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition"
+                    >
+                      <div className="flex items-start justify-between gap-4 mb-2">
+                        <Link
+                          href={`/blogs/${entry.blog.id}`}
+                          className="text-blue-600 hover:underline font-semibold flex-1"
+                        >
+                          {entry.blog.title}
+                        </Link>
+                        <form action={markAsRead.bind(null, entry.id)}>
+                          <button
+                            type="submit"
+                            className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm whitespace-nowrap transition"
+                          >
+                            Mark as read
+                          </button>
+                        </form>
+                      </div>
+                      <p className="text-gray-600 text-sm mb-2">
+                        <strong>Author:</strong> {entry.blog.author}
+                      </p>
+                      <p className="text-gray-600 text-sm">
+                        <strong>URL:</strong>{" "}
+                        <a
+                          href={entry.blog.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:underline"
+                        >
+                          {entry.blog.url}
+                        </a>
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Read Section */}
+            {readBlogs.length > 0 && (
+              <div>
+                <h4 className="text-lg font-semibold text-gray-800 mb-3">
+                  Read ({readBlogs.length})
+                </h4>
+                <ul className="space-y-3">
+                  {readBlogs.map((entry) => (
+                    <li
+                      key={entry.id}
+                      className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition bg-green-50"
+                    >
+                      <div className="flex items-start justify-between gap-4 mb-2">
+                        <Link
+                          href={`/blogs/${entry.blog.id}`}
+                          className="text-blue-600 hover:underline font-semibold flex-1"
+                        >
+                          {entry.blog.title}
+                        </Link>
+                        <span className="text-green-600 font-medium text-sm whitespace-nowrap">
+                          ✓ Read
+                        </span>
+                      </div>
+                      <p className="text-gray-600 text-sm mb-2">
+                        <strong>Author:</strong> {entry.blog.author}
+                      </p>
+                      <p className="text-gray-600 text-sm">
+                        <strong>URL:</strong>{" "}
+                        <a
+                          href={entry.blog.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:underline"
+                        >
+                          {entry.blog.url}
+                        </a>
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         )}
       </div>
     </div>
