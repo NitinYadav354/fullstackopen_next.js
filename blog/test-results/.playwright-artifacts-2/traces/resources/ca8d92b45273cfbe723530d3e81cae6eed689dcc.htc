@@ -1,0 +1,36 @@
+2:"$Sreact.fragment"
+4:I["[project]/node_modules/next/dist/next-devtools/userspace/app/segment-explorer-node.js [app-client] (ecmascript)",["/_next/static/chunks/node_modules_02xlrxs._.js","/_next/static/chunks/app_components_0p08i6x._.js","/_next/static/chunks/app_layout_tsx_007e4b2._.js"],"SegmentViewNode"]
+6:I["[project]/node_modules/next/dist/client/components/client-page.js [app-client] (ecmascript)",["/_next/static/chunks/node_modules_02xlrxs._.js","/_next/static/chunks/app_components_0p08i6x._.js","/_next/static/chunks/app_layout_tsx_007e4b2._.js"],"ClientPageRoot"]
+7:I["[project]/app/page.tsx [app-client] (ecmascript)",["/_next/static/chunks/node_modules_02xlrxs._.js","/_next/static/chunks/app_components_0p08i6x._.js","/_next/static/chunks/app_layout_tsx_007e4b2._.js","/_next/static/chunks/_124q78-._.js","/_next/static/chunks/app_page_tsx_1z5g_z7._.js"],"default"]
+f:I["[project]/node_modules/next/dist/lib/framework/boundary-components.js [app-client] (ecmascript)",["/_next/static/chunks/node_modules_02xlrxs._.js","/_next/static/chunks/app_components_0p08i6x._.js","/_next/static/chunks/app_layout_tsx_007e4b2._.js"],"OutletBoundary"]
+11:"$Sreact.suspense"
+1e:I["[project]/node_modules/next/dist/lib/framework/boundary-components.js [app-client] (ecmascript)",["/_next/static/chunks/node_modules_02xlrxs._.js","/_next/static/chunks/app_components_0p08i6x._.js","/_next/static/chunks/app_layout_tsx_007e4b2._.js"],"ViewportBoundary"]
+28:I["[project]/node_modules/next/dist/lib/framework/boundary-components.js [app-client] (ecmascript)",["/_next/static/chunks/node_modules_02xlrxs._.js","/_next/static/chunks/app_components_0p08i6x._.js","/_next/static/chunks/app_layout_tsx_007e4b2._.js"],"MetadataBoundary"]
+a:D"$c"
+a:D"$b"
+a:D"$e"
+a:["$","$Lf",null,{"children":["$","$11",null,{"name":"Next.MetadataOutlet","children":"$@12"},"$b","$10",1]},"$b","$d",1]
+14:D"$17"
+14:D"$15"
+14:D"$18"
+14:null
+19:D"$1b"
+19:D"$1a"
+19:D"$1d"
+1f:D"$21"
+1f:D"$20"
+19:["$","$L1e","c83017d6v",{"children":"$L1f"},"$1a","$1c",1]
+22:D"$24"
+22:D"$23"
+22:D"$26"
+2a:D"$2c"
+2a:D"$2b"
+22:["$","div","c83017d6m",{"hidden":true,"children":["$","$L28",null,{"children":["$","$11",null,{"name":"Next.Metadata","children":"$L2a"},"$23","$29",1]},"$23","$27",1]},"$23","$25",1]
+0:{"f":[["children","__PAGE__",["__PAGE__",{}],[["$","$2","c",{"children":[["$","$L4","c-page",{"type":"page","pagePath":"page.tsx","children":["$","$L6",null,{"Component":"$7","serverProvidedParams":{"searchParams":{},"params":{},"promises":null}},null,"$5",1]},null,"$3",1],[["$","script","script-0",{"src":"/_next/static/chunks/_124q78-._.js","async":true,"nonce":"$undefined"},null,"$8",0],["$","script","script-1",{"src":"/_next/static/chunks/app_page_tsx_1z5g_z7._.js","async":true,"nonce":"$undefined"},null,"$9",0]],"$a"]},null,"$1",0],{},null,false,null],["$","$2","h",{"children":["$14","$19","$22"]},null,"$13",0],false]],"q":"","i":true,"S":false,"h":null,"b":"development"}
+1f:D"$2d"
+1f:[["$","meta","0",{"charSet":"utf-8"},"$b","$2e",0],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"},"$b","$2f",0]]
+34:I["[project]/node_modules/next/dist/lib/metadata/generate/icon-mark.js [app-client] (ecmascript)",["/_next/static/chunks/node_modules_02xlrxs._.js","/_next/static/chunks/app_components_0p08i6x._.js","/_next/static/chunks/app_layout_tsx_007e4b2._.js"],"IconMark"]
+12:D"$30"
+12:null
+2a:D"$31"
+2a:[["$","link","0",{"rel":"icon","href":"/favicon.ico?favicon.2vob68tjqpejf.ico","sizes":"256x256","type":"image/x-icon"},"$b","$32",0],["$","$L34","1",{},"$b","$33",0]]

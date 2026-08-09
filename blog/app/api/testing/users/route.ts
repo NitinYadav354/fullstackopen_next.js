@@ -2,6 +2,7 @@ import { NextResponse, NextRequest } from "next/server"
 import { db } from "@/db"
 import { users } from "@/db/schema"
 import bcrypt from "bcryptjs"
+import { randomUUID } from "crypto"
 
 export const POST = async (request: NextRequest) => {
   if (process.env.NODE_ENV === "production") {
@@ -36,6 +37,7 @@ export const POST = async (request: NextRequest) => {
 
     // Hash password
     const passwordHash = await bcrypt.hash(password, 10)
+    const token = randomUUID()
 
     // Create user
     const result = await db
@@ -44,6 +46,7 @@ export const POST = async (request: NextRequest) => {
         username,
         name,
         passwordHash,
+        token,
       })
       .returning()
 
@@ -54,8 +57,9 @@ export const POST = async (request: NextRequest) => {
         id: createdUser.id,
         username: createdUser.username,
         name: createdUser.name,
+        token: createdUser.token,
       },
-      { status: 201 }
+      { status: 200 }
     )
   } catch (error) {
     return NextResponse.json(

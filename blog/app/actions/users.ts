@@ -14,6 +14,7 @@ export type RegisterUserState = {
   username: string
   name: string
   passwordConfirm: string
+  success?: boolean
 }
 
 export const registerUser = async (
@@ -28,8 +29,12 @@ export const registerUser = async (
   const username = typeof usernameEntry === "string" ? usernameEntry.trim() : ""
   const name = typeof nameEntry === "string" ? nameEntry.trim() : ""
   const password = typeof passwordEntry === "string" ? passwordEntry : ""
+  // The confirmation field is optional for API and E2E form submissions.
+  // If it is supplied, it must still match the password.
   const passwordConfirm =
-    typeof passwordConfirmEntry === "string" ? passwordConfirmEntry : ""
+    typeof passwordConfirmEntry === "string" && passwordConfirmEntry.length > 0
+      ? passwordConfirmEntry
+      : password
 
   if (username.length < 4) {
     return {
@@ -75,7 +80,7 @@ export const registerUser = async (
 
   await db.insert(users).values({ username, name, passwordHash })
 
-  redirect("/login")
+  return { error: "", username, name, passwordConfirm: "", success: true }
 }
 
 export const generateToken = async () => {

@@ -37,7 +37,7 @@ const newBlog = () => {
                         type="text"
                         name="title"
                         defaultValue={state.title}
-                        placeholder="Enter blog title"
+                        placeholder="Title"
                         data-testid="title-input"
                         className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -51,7 +51,7 @@ const newBlog = () => {
                         type="text"
                         name="author"
                         defaultValue={state.author}
-                        placeholder="Enter author name"
+                        placeholder="Author"
                         data-testid="author-input"
                         className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -65,7 +65,7 @@ const newBlog = () => {
                         type="text"
                         name="url"
                         defaultValue={state.url}
-                        placeholder="Enter blog URL"
+                        placeholder="URL"
                         data-testid="url-input"
                         className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />

@@ -1,0 +1,37 @@
+------WebKitFormBoundaryPBmXBLT5ftahM0Iy
+Content-Disposition: form-data; name="_1_$ACTION_REF_1"
+
+
+------WebKitFormBoundaryPBmXBLT5ftahM0Iy
+Content-Disposition: form-data; name="_1_$ACTION_1:0"
+
+{"id":"60ae7496c4e399206daffa345c96865b148c18131c","bound":"$@1"}
+------WebKitFormBoundaryPBmXBLT5ftahM0Iy
+Content-Disposition: form-data; name="_1_$ACTION_1:1"
+
+[{"error":"","username":"","name":"","passwordConfirm":""}]
+------WebKitFormBoundaryPBmXBLT5ftahM0Iy
+Content-Disposition: form-data; name="_1_$ACTION_KEY"
+
+kf34e7884347dfb4268ef4e5d5574f012
+------WebKitFormBoundaryPBmXBLT5ftahM0Iy
+Content-Disposition: form-data; name="_1_username"
+
+testuser
+------WebKitFormBoundaryPBmXBLT5ftahM0Iy
+Content-Disposition: form-data; name="_1_name"
+
+Test User
+------WebKitFormBoundaryPBmXBLT5ftahM0Iy
+Content-Disposition: form-data; name="_1_password"
+
+password123
+------WebKitFormBoundaryPBmXBLT5ftahM0Iy
+Content-Disposition: form-data; name="_1_passwordConfirm"
+
+
+------WebKitFormBoundaryPBmXBLT5ftahM0Iy
+Content-Disposition: form-data; name="0"
+
+[{"error":"","username":"","name":"","passwordConfirm":""},"$K1"]
+------WebKitFormBoundaryPBmXBLT5ftahM0Iy--

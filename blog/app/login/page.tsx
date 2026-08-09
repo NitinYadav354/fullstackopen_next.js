@@ -30,21 +30,21 @@ export default function LoginPage() {
     return(
         <div>      
             <h2>Login</h2>  
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            {error && <p data-testid="notification" style={{ color: "red" }}>{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div>
           <label>
             Username
-            <input type="text" name="username" required data-testid="username-input" />
+            <input type="text" name="username" placeholder="Username" required data-testid="username-input" />
           </label>
         </div>
         <div>
           <label>
             Password
-            <input type="password" name="password" required data-testid="password-input" />
+            <input type="password" name="password" placeholder="Password" required data-testid="password-input" />
           </label>
         </div>
-        <button type="submit" data-testid="login-button">submit</button>
+        <button type="submit" data-testid="login-button">Login</button>
             </form>
 
         </div>

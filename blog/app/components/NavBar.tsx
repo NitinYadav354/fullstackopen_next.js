@@ -17,12 +17,12 @@ export default function NavBar() {
           <>
             <NavLink href="/blogs/new">create new</NavLink>
             <NavLink href="/me">my profile</NavLink>
-            <em className="text-gray-300">{session.user?.name} logged in</em>
+            <em className="text-gray-300">{session.user?.email} logged in</em>
             <button
-              onClick={() => signOut()}
+              onClick={() => signOut({ redirectTo: "/" })}
               className="bg-gray-600 hover:bg-gray-500 px-3 py-1 rounded text-sm"
             >
-              logout
+              Logout
             </button>
           </>
         ) : (

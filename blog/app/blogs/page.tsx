@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { getBlogs } from "../services/blogs"
+import AddToReadingListButton from "../components/AddToReadingListButton"
 
 const Blogs = async ({
   searchParams,
@@ -61,6 +62,7 @@ const Blogs = async ({
                 {blog.likes}
               </span>
             </p>
+            <AddToReadingListButton blogId={blog.id} />
           </li>
         ))}
       </ul>

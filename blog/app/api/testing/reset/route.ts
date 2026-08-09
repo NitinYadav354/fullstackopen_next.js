@@ -11,7 +11,6 @@ export const DELETE = async () => {
   }
 
   try {
-    // Delete in order to respect foreign key constraints
     await db.delete(readingList)
     await db.delete(blogs)
     await db.delete(users)
